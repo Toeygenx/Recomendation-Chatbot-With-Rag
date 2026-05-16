@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 250 89% 68%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 250 89% 68%;
+    --accent-foreground: 222 47% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 20%;
+    --input: 217 33% 17%;
+    --ring: 250 89% 68%;
+
+    --radius: 0.75rem;
+
+    /* Custom colors */
+    --gradient-start: 250 89% 68%;
+    --gradient-end: 199 89% 48%;
+    --glass: 222 47% 12%;
+    --glass-border: 217 33% 25%;
+    --success: 142 76% 36%;
+
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 250 89% 68%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 20%;
+    --sidebar-ring: 250 89% 68%;
+  }
+
+  /* Light theme - Green #02BC77 (softer) */
+  :root.light {
+    --background: 210 20% 95%;
+    --foreground: 220 9% 20%;
+
+    --card: 210 15% 97%;
+    --card-foreground: 220 9% 20%;
+
+    --popover: 210 15% 97%;
+    --popover-foreground: 220 9% 20%;
+
+    --primary: 158 97% 37%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 15% 90%;
+    --secondary-foreground: 220 9% 20%;
+
+    --muted: 210 15% 90%;
+    --muted-foreground: 220 9% 40%;
+
+    --accent: 158 97% 37%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 15% 85%;
+    --input: 210 15% 88%;
+    --ring: 158 97% 37%;
+
+    /* Custom colors */
+    --gradient-start: 158 97% 37%;
+    --gradient-end: 158 70% 50%;
+    --glass: 210 15% 93%;
+    --glass-border: 210 15% 85%;
+    --success: 142 76% 36%;
+
+    --sidebar-background: 210 15% 97%;
+    --sidebar-foreground: 220 9% 20%;
+    --sidebar-primary: 158 97% 37%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 15% 90%;
+    --sidebar-accent-foreground: 220 9% 20%;
+    --sidebar-border: 210 15% 85%;
+    --sidebar-ring: 158 97% 37%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-xl border border-glass-border rounded-xl;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent-blue bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    @apply relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl p-[1px];
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 60px -15px hsl(var(--primary) / 0.4);
+  }
+
+  .chat-bubble {
+    @apply px-4 py-3 rounded-2xl max-w-[80%];
+  }
+
+  .chat-bubble-user {
+    @apply bg-primary text-primary-foreground ml-auto rounded-br-md;
+  }
+
+  .chat-bubble-bot {
+    @apply bg-secondary text-secondary-foreground mr-auto rounded-bl-md;
+  }
+
+  .loading-dots {
+    @apply flex gap-1;
+  }
+
+  .loading-dots span {
+    @apply w-2 h-2 bg-muted-foreground rounded-full animate-bounce;
+  }
+
+  .loading-dots span:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .loading-dots span:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
