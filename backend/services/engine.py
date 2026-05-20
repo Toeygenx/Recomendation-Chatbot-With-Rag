@@ -24,7 +24,7 @@ from models.schemas import QueryIntent, QueryCategory, ExpandedQuery, LogEntry
 from prompts.templates import PROMPT_MAP
 
 # Rerankers
-# from llama_index.core.postprocessor import LLMRerank
+from llama_index.core.postprocessor import LLMRerank
 # from llama_index.postprocessor.sbert_rerank import SentenceTransformerRerank
 
 from llama_index.core.bridge.pydantic import PrivateAttr
