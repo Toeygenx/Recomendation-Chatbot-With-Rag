@@ -24,8 +24,8 @@ from models.schemas import QueryIntent, QueryCategory, ExpandedQuery, LogEntry
 from prompts.templates import PROMPT_MAP
 
 # Rerankers
-from llama_index.core.postprocessor import LLMRerank
-from llama_index.postprocessor.sbert_rerank import SentenceTransformerRerank
+# from llama_index.core.postprocessor import LLMRerank
+# from llama_index.postprocessor.sbert_rerank import SentenceTransformerRerank
 
 from llama_index.core.bridge.pydantic import PrivateAttr
 
@@ -75,13 +75,17 @@ class UniversityRAG_Engine(CustomQueryEngine):
         
         # Init Reranker (Legacy SBERT support, but using LLM in Retriever now)
         # Keeping this if standalone reranking is needed, though Retriever handles it internally for some strats.
-        if RERANK_MODE == "sbert":
-            self._reranker = SentenceTransformerRerank(
-                model="BAAI/bge-reranker-base", 
-                top_n=TOP_K_RERANK
-            )
-        elif RERANK_MODE == "llm":
-            self._reranker = LLMRerank(
+        # if RERANK_MODE == "sbert":
+        #     self._reranker = SentenceTransformerRerank(
+        #         model="BAAI/bge-reranker-base", 
+        #         top_n=TOP_K_RERANK
+        #     )
+        # elif RERANK_MODE == "llm":
+        #     self._reranker = LLMRerank(
+        #         llm=rerank_llm,
+        #         top_n=TOP_K_RERANK,
+        #     )
+        self._reranker = LLMRerank(
                 llm=rerank_llm,
                 top_n=TOP_K_RERANK,
             )
