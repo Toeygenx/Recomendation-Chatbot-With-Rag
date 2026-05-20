@@ -14,3 +14,4 @@ llama-index-embeddings-openai
 llama-index-embeddings-huggingface
 llama-index-vector-stores-chroma
 sentence-transformers
+llama-index-postprocessor-sbert-rerank
