@@ -124,6 +124,22 @@ async def chat_endpoint(request: ChatRequest, engine: UniversityRAG_Engine = Dep
 async def health_check():
     return {"status": "healthy", "rag_engine": "ready" if rag_engine else "not_ready"}
 
+@app.get("/api/ingest_initial_data_secret")
+async def ingest_initial_data_secret():
+    """Temporary endpoint to trigger ingestion from browser"""
+    import asyncio
+    from services.ingestion import ingest_sql, ingest_chroma
+    
+    # Run in background to not block the request completely if it takes long
+    def run_ingestion():
+        print("Starting manual ingestion via API...")
+        ingest_sql()
+        ingest_chroma()
+        print("Manual ingestion finished.")
+        
+    asyncio.create_task(asyncio.to_thread(run_ingestion))
+    return {"message": "Ingestion process started in background. Please check Railway logs."}
+
 @app.get("/api/courses", response_model=list[CourseName])
 async def get_courses():
     """
