@@ -21,9 +21,9 @@ Settings.callback_manager = CallbackManager([token_counter_main])
 # ---- PATH / CONFIG ----
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # Go up one level from core/
 DATA_DIR = os.path.join(BASE_DIR, "data")
-CHROMA_DB_DIR = os.path.join(BASE_DIR, "chroma_db")
+CHROMA_DB_DIR = os.path.join(BASE_DIR, "chroma_db") or "/backend/chroma_db"
 CHROMA_COLLECTION = "rag_courses"
-
+print(f"Data Directory: {DATA_DIR}")
 # Adjust source data dir logic if needed, but for now we assume we copy to DATA_DIR manually or via script
 CSV_PATH_DESCRIPTION = os.path.join(DATA_DIR, "description.csv")
 CSV_PATH_REVIEW = os.path.join(DATA_DIR, "review.csv")
